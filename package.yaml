@@ -25,6 +25,7 @@ dependencies:
 - vector
 - transformers
 - bytestring
+- parsec
 - binary
 
 library:

@@ -6,13 +6,51 @@ Click Below for Video
 
 [![Click for Video](./static/bezier.png)](https://www.youtube.com/watch?v=Kq98aiAKKmE)
 
-
 ## How to Build?
 ```
 stack build # Installs all dependencies
 stack install # Installs the package locally
 stack run # Runs the built executable
 ```
+
+## How to run?
+```
+wavemaker-exe -t TEMPO_IN_BPM -i music.wmk 
+```
+To play music written in music.wmk, at specified BPM
+
+If `tempo` and `filename` is not specified, default tempo is **100**, and if `filename` isn't
+specified, all notes in an Octave are played.
+
+Simple melodies can be specified using the following grammar
+
+```
+[a1a2..] implies on of (a1,a2,a3.. and so on)
+a+  implies one or more of a
+a* implies none or more of a 
+a? implies one or none of a 
+
+note  := [ABCDEFGR](#?)[Integer][WHQEST]
+mujik := note*
+
+Here, [ABCDEFG] represents the Root Notes. 
+R is for Rest. (No Sound)
+# is obvious, (Flats not supported)
+[WHQEST] represents the length of the note
+W -> Whole (4 Beats)
+H -> Half (2 Beats)
+Q -> Quarter (1 Beat)
+E -> Eighth (0.5 Beat)
+S -> Sixteenth (0.25 Beat)
+T -> ThirtySecond (0.125 Beat)
+
+These mappings are conventional.
+
+any valid music reccognized by this program is nothing but a space separated list of 
+notes.
+```
+
+**Refer to this [sample](./sample_music.wmk) as an example**
 
 ## What is PCM?
 According to [wikipedia](https://en.wikipedia.org/wiki/Pulse-code_modulation):

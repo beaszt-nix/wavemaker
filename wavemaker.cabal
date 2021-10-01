@@ -25,6 +25,8 @@ source-repository head
 
 library
   exposed-modules:
+      Parser.Logic
+      Parser.Types
       PCM.Player
       PCM.Wave
       Sample.Bezier.Input
@@ -42,6 +44,7 @@ library
     , base >=4.7 && <5
     , binary
     , bytestring
+    , parsec
     , sdl2
     , transformers
     , vector
@@ -59,6 +62,7 @@ executable wavemaker-exe
     , base >=4.7 && <5
     , binary
     , bytestring
+    , parsec
     , sdl2
     , transformers
     , vector
@@ -78,6 +82,7 @@ test-suite wavemaker-test
     , base >=4.7 && <5
     , binary
     , bytestring
+    , parsec
     , sdl2
     , transformers
     , vector
