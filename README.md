@@ -4,7 +4,7 @@ Synthesizes musical notes using **Pulse Code Modulation**,
 
 Click Below for Video
 
-[![Click for Video](./static/bezier.png)](https://www.youtube.com/watch?v=Kq98aiAKKmE)
+[![Click for Video](./static/img/bezier.png)](https://www.youtube.com/watch?v=Kq98aiAKKmE)
 
 ## How to Build?
 ```
@@ -50,7 +50,7 @@ any valid music reccognized by this program is nothing but a space separated lis
 notes.
 ```
 
-**Refer to this [sample](./sample_music.wmk) as an example**
+**Refer to this [sample](./static/music/twinkle.wmk) as an example**
 
 ## What is PCM?
 According to [wikipedia](https://en.wikipedia.org/wiki/Pulse-code_modulation):
@@ -59,7 +59,7 @@ According to [wikipedia](https://en.wikipedia.org/wiki/Pulse-code_modulation):
 ### What does that actually do?
 Consider we have an initial signal.
 
-![Sine Wave](./static/WQ69y.jpg) ![Sine wave goes to Jail](./static/jail.jpg)
+![Sine Wave](./static/img/WQ69y.jpg) ![Sine wave goes to Jail](./static/img/jail.jpg)
 
 In order to digitally store this, we have to sample this signal at regular intervals, at some **sampling rate**, and store these samples.
 
@@ -153,7 +153,7 @@ Using Bezier curves, we can define a continuous line using a set of **Control Po
 
 This looks something like
 
-<img width="500" alt="portfolio_view" src="./static/1200px-Bezier_curve.svg.png">
+<img width="500" alt="portfolio_view" src="./static/img/1200px-Bezier_curve.svg.png">
 
 The curve will necessarily pass through first and last points, and the rest of the points
 control the direction and sharpness of the curves.

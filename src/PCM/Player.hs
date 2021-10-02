@@ -4,7 +4,8 @@ module PCM.Player where
 
 import qualified Data.ByteString         as B
 import qualified Data.ByteString.Builder as B
-import GHC.Real
+import           Data.Array.ST
+import           GHC.Real
 
 data PlayerState a = PlayerState {
   pitchStandard :: a,
