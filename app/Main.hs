@@ -26,26 +26,31 @@ getTempo _ = Nothing
 getFileName ["-i", x] = Just x
 getFileName _ = Nothing
 
+getOpName ["-o", x] = Just x
+getOpName _ = Nothing
+
 getArgs' :: ([String] -> Maybe a) -> [String] -> IO (Maybe a,[String])
 getArgs' f xs = return $ 
   case f (take 2 xs) of
     x@(Just _)  -> (x, drop 2 xs)
     Nothing     -> (Nothing, xs)
 
-main :: IO ()
+
 main = do
-  !f <- Bez.mkTone 16000 600 400
+  !f <- Bez.mkTone 44100 600 400
   getArgs >>= print
   (tempo', xs)     <- getArgs >>= getArgs' getTempo
   (fileName, xs')  <- getArgs' getFileName xs
+  (output, _)      <- getArgs' getOpName xs
 
-  let ps  = PlayerState {
+  let 
+      ps  = PlayerState {
           pitchStandard = 440,
-          tone = f,
           tempo = fromMaybe 100 tempo',
-          sampleRate = 16000,
-          volume=0.01,
-          builder=B.floatLE 
+          samples = genWave f 44100,
+          sampleRate = 44100,
+          volume =0.01,
+          builder=B.floatLE
         }
       wv = Wav {
           dataChunk =  B.empty ,
@@ -53,7 +58,6 @@ main = do
           channels = 1,
           bitsPerSample = 32
         }
-
   case fileName of 
     Just name -> do
       phrases <- words <$> readFile name
@@ -61,7 +65,7 @@ main = do
           !music = mconcat $ map (note ps . mapNote) mus
           res    = B.toLazyByteString music
           wav    = mkWav wv {dataChunk = BL.toStrict res}
-      BL.writeFile "output.wav" $ runPut wav
+      BL.writeFile (fromMaybe "output.wav" output) $ runPut wav
     Nothing -> do
       let 
         !notes = mconcat [
@@ -80,4 +84,4 @@ main = do
           , note ps (1,-8 + 12, False)]
         res   = B.toLazyByteString notes
         wav   = mkWav wv {dataChunk = BL.toStrict res}
-      BL.writeFile "output.wav" $ runPut wav
+      BL.writeFile (fromMaybe "output.wav" output) $ runPut wav
